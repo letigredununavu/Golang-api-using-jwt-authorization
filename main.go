@@ -25,8 +25,8 @@ const indexPage string = `
 const createQuestionPage string = `
 <h1>Create Question</h1>
 <form method="post" action="/addQuestion">
-	<label for="question">Question</label>
-	<input type="text" id="question" name="question">
+	<label for="body">Question</label>
+	<input type="text" id="body" name="body">
 	<label for="reponse">Reponse</label>
 	<input type="text" id="reponse" name="reponse">
 	<button type="submit">Create</button>
@@ -34,7 +34,7 @@ const createQuestionPage string = `
 `
 
 func createQuestionHandler(response http.ResponseWriter, request *http.Request) {
-	body := request.FormValue("question")
+	body := request.FormValue("body")
 	reponse := request.FormValue("reponse")
 	redirectTarget := "/db"
 	if body != "" && reponse != "" {
