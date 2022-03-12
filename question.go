@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 type Question struct {
@@ -12,30 +11,26 @@ type Question struct {
 	Reponse string `json:"reponse"`
 }
 
-var ErrorIdNotFound error = errors.New("Question Id not found")
+var ErrorQuestionIdNotFound error = errors.New("Question Id not found")
 
-var serialId uint32 = 1
+var serialQuestionId uint32 = 1
 
 var db []Question
 
-func hola() {
-	fmt.Println("Allo dans test.go")
-}
-
-func makeQuestion(body string, reponse string) Question {
-	question := Question{
-		Id:      serialId,
+func makeQuestion(body string, reponse string) *Question {
+	question := &Question{
+		Id:      serialQuestionId,
 		Vote:    0,
 		Body:    body,
 		Reponse: reponse,
 	}
-	serialId += 1
+	serialQuestionId += 1
 
 	return question
 }
 
-func addQuestion(question Question) int {
-	db = append(db, question)
+func addQuestion(question *Question) int {
+	db = append(db, *question)
 	return 0
 }
 
@@ -47,7 +42,7 @@ func removeQuestion(id uint32) error {
 			return nil
 		}
 	}
-	return ErrorIdNotFound
+	return ErrorQuestionIdNotFound
 }
 
 func updateQuestion(id uint32, question Question) error {
@@ -57,17 +52,17 @@ func updateQuestion(id uint32, question Question) error {
 			return nil
 		}
 	}
-	return ErrorIdNotFound
+	return ErrorQuestionIdNotFound
 }
 
-func getQuestionById(id uint32) (Question, error) {
-	for i, question := range db {
+func getQuestionById(id uint32) (*Question, error) {
+	for _, question := range db {
 		if question.Id == id {
-			return db[i], nil
+			return &question, nil
 		}
 	}
 
-	return Question{0, 0, "", ""}, ErrorIdNotFound
+	return nil, ErrorQuestionIdNotFound
 
 }
 
