@@ -8,7 +8,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var SECRET_KEY string = "MonAppDeCultutreG"
+var SECRET_KEY string = "MaClefQuiDevraitEtrePlusLongueEtSecreteQueCa"
 
 type customClaims struct {
 	Username string `json:"username"`
@@ -52,7 +52,7 @@ func createJWTToken(player *Player, expirationTime time.Time) (*string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// La clef devrait être secrète pour vrai
-	signedToken, err := token.SignedString([]byte("MaClefSecrete"))
+	signedToken, err := token.SignedString([]byte(SECRET_KEY))
 	if err != nil {
 		return nil, err
 	}
