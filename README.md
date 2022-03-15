@@ -1,11 +1,8 @@
-# Golang-api
+# Golang api using jwt authorization
 Todo : 
-- User identification
-- Question Types
-- Add questions to hub
-- Add users to hub
-- Play simultaneously
-- Get points 
-- Voting for question we like
-- Check si jwt auth est correcte
-- Check pour le jwt refresh si c'est correcte
+- User Authorization
+  - Store access token via browser memory
+  - Store refresh token via cookie
+  - Make /refresh path to get new pair of token
+
+- Make password secure (only storing a hash based uppon the password string provided)
